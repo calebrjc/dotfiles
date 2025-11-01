@@ -1,0 +1,27 @@
+packages:
+  dnf:
+    - atuin
+    - bat
+    - btop
+    - chezmoi
+    - cmake
+    - curl
+    - git-delta
+    - fd-find
+    - fzf
+    - gnome-tweaks
+    - golang
+    - neovim
+    - pass
+    - ripgrep
+    - tldr
+    - wezterm
+    - wget
+    - zoxide
+    - zsh
+  flatpak:
+    - com.mattjakeman.ExtensionManager
+    - com.vivaldi.Vivaldi
+    - org.kicad.KiCad
+    - io.missioncenter.MissionCenter
+    - com.spotify.Client

@@ -1,0 +1,35 @@
+---
+# File:        setup.yml
+# Description: Ansible playbook for setting up a new machine.
+
+# TODO:
+# - Install uv
+
+# Installation steps:
+# - user:    Install chezmoi
+# - chezmoi: Load dotfiles
+# - chezmoi: Install uv and ansible; prepare ansible (`ansible-galaxy collection install community.general`)
+# - chezmoi: Run ansible
+# - ansible: Install packages
+
+- name: Set up Machine
+  hosts: localhost
+  connection: local
+  vars_files:
+    - vars/packages.yml
+    - vars/repos.yml
+  tasks:
+    - name: Install packages
+      ansible.builtin.import_tasks: tasks/packages.yml
+    - name: Ensure default shell is /bin/zsh for "{{ ansible_env.USER }}"
+      become: true
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        shell: /bin/zsh
+    - name: Apply GNOME dconf keys
+      community.general.dconf:
+        key: "/{{ item.0.key | replace('.', '/') }}/{{ item.1.key }}"
+        value: "{{ item.1.value }}"
+      loop: "{{ desktop['dconf-gnome'] | dict2items | subelements('value') }}"
+      loop_control:
+        label: "{{ item.0.key }}/{{ item.1.key }}"
