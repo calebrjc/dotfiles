@@ -2,6 +2,7 @@
 
 if command -v ansible-playbook &> /dev/null; then
     echo "ansible is already installed, skipping..."
-end
+    exit 0
+fi
 
-sudo dnf install ansible ansible-collection-community-general
+sudo dnf install -y ansible ansible-collection-community-general
