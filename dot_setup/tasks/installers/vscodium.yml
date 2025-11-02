@@ -1,12 +1,12 @@
 ---
-- name: Install VSCodium
+- name: Installers - VSCodium
   become: true
   block:
-    - name: Import VSCodium GPG key to the RPM database
+    - name: Installers - VSCodium - Import VSCodium GPG key
       ansible.builtin.rpm_key:
         key: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
 
-    - name: Add repository
+    - name: Installers - VSCodium - Add VSCodium repo to DNF
       ansible.builtin.yum_repository:
         name: gitlab.com_paulcarroty_vscodium_repo
         description: VSCodium repository created by Ansible
@@ -17,7 +17,7 @@
         gpgkey: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
         metadata_expire: 3600
 
-    - name: Install VSCodium
+    - name: Installers - VSCodium - Install VSCodium
       ansible.builtin.dnf:
         name: codium
         state: present

@@ -4,6 +4,7 @@
   ansible.builtin.dnf:
     name: "*"
     state: latest
+  when: false # Skip for now
 
 - name: Packages - DNF - Enable copr repositories
   become: true
