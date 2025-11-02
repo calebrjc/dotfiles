@@ -26,10 +26,3 @@
       ansible.builtin.user:
         name: "{{ ansible_env.USER }}"
         shell: /bin/zsh
-    - name: Apply GNOME dconf keys
-      community.general.dconf:
-        key: "/{{ item.0.key | replace('.', '/') }}/{{ item.1.key }}"
-        value: "{{ item.1.value }}"
-      loop: "{{ desktop['dconf-gnome'] | dict2items | subelements('value') }}"
-      loop_control:
-        label: "{{ item.0.key }}/{{ item.1.key }}"
