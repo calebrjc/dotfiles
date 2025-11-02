@@ -19,9 +19,9 @@
     - vars/packages.yml
     - vars/repos.yml
   tasks:
-    - name: Install packages
+    - name: Setup - Install packages
       ansible.builtin.import_tasks: tasks/packages.yml
-    - name: Ensure default shell is /bin/zsh for "{{ ansible_env.USER }}"
+    - name: Setup - Ensure default shell is /bin/zsh for "{{ ansible_env.USER }}"
       become: true
       ansible.builtin.user:
         name: "{{ ansible_env.USER }}"

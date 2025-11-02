@@ -1,39 +1,42 @@
 ---
-- name: DNF - Upgrade system packages
+- name: Packages - DNF - Upgrade system packages
   become: true
   ansible.builtin.dnf:
     name: "*"
     state: latest
 
-- name: DNF - Enable copr repositories
+- name: Packages - DNF - Enable copr repositories
   become: true
   community.general.copr:
     name: "{{ item }}"
   loop: "{{ repos.copr }}"
 
-- name: DNF - Install packages
+- name: Packages - DNF - Install packages
   become: true
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: present
   loop: "{{ packages.dnf }}"
 
-- name: Flatpak - Enable Flathub repo
+- name: Packages - Flatpak - Enable Flathub repo
   become: true
   community.general.flatpak_remote:
     name: flathub
     state: present
     flatpakrepo_url: https://dl.flathub.org/repo/flathub.flatpakrepo
 
-- name: Flatpak - Disable Fedora repo
+- name: Packages - Flatpak - Disable Fedora repo
   become: true
   community.general.flatpak_remote:
     name: fedora
     state: absent
 
-- name: Flatpak - Install packages
+- name: Packages - Flatpak - Install packages
   become: true
   community.general.flatpak:
     name: "{{ item }}"
     state: present
   loop: "{{ packages.flatpak }}"
+  
+- name: Packages - Install VSCodium
+  ansible.builtin.import_tasks: installers/vscodium.yml
