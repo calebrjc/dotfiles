@@ -10,7 +10,7 @@ echo "Starting font installation..."
 for font in "${FONTS[@]}"; do
     script="install-font-${font}.sh"
     if [[ -x "$script" ]]; then
-        ./"$script"
+        sh "$script"
     else
         echo "Warning: $script not found or not executable — skipping."
     fi
