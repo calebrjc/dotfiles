@@ -1,5 +1,10 @@
 # Automation TODOs
 
+- Move font installation to Ansible
+
+- Install uv-based tools
+  - ruff
+
 - Integrate dconf settings
   - org.gnome.desktop.interface.color-scheme = 'prefer-dark'
   - org.gnome.desktop.interface.font-name = 'Inter Variable 11'

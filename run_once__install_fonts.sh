@@ -1,17 +1,8 @@
 #!/bin/bash
 
-FONTS=(
-    "inter"
-    "googlesanscode"
-)
-
-echo "Starting font installation..."
-
-for font in "${FONTS[@]}"; do
-    script="install-font-${font}.sh"
-    if [[ -x "$script" ]]; then
-        sh "$script"
-    else
-        echo "Warning: $script not found or not executable — skipping."
-    fi
-done
+fontmgr.py install \
+    "https://github.com/E-Vertin/GoogleSansCode-NerdFont/releases/download/v6.001/GoogleSansCode-NFM-v6.001.tar.xz" \
+    --pattern "*.ttf"
+fontmgr.py install \
+    "https://github.com/rsms/inter/releases/download/v4.1/Inter-4.1.zip" \
+    --pattern "InterVariable*.ttf"

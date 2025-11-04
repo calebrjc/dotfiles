@@ -15,8 +15,10 @@ packages:
     - pass
     - ripgrep
     - tldr
+    - uv
     - wezterm
     - wget
+    - xz
     - zoxide
     - zsh
   flatpak:
