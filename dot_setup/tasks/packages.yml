@@ -1,11 +1,4 @@
 ---
-- name: Packages - DNF - Upgrade system packages
-  become: true
-  ansible.builtin.dnf:
-    name: "*"
-    state: latest
-  when: false # Skip for now
-
 - name: Packages - DNF - Enable copr repositories
   become: true
   community.general.copr:

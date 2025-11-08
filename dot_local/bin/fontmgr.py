@@ -51,7 +51,6 @@ def get_archive_base_name(path: pathlib.Path) -> str:
 
 def normalize_glob_patterns(patterns: str | list[str]) -> list[str]:
     if isinstance(patterns, str):
-        # split on whitespace
         patterns = patterns.split()
 
     result = []
@@ -59,8 +58,6 @@ def normalize_glob_patterns(patterns: str | list[str]) -> list[str]:
         p = p.strip()
         if not p:
             continue
-        if not p.startswith("**/"):
-            p = f"**/{p}"
         result.append(p)
     return result
 

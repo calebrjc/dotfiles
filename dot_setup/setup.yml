@@ -2,25 +2,20 @@
 # File:        setup.yml
 # Description: Ansible playbook for setting up a new machine.
 
-# TODO:
-# - Install uv
-
-# Installation steps:
-# - user:    Install chezmoi
-# - chezmoi: Load dotfiles
-# - chezmoi: Install uv and ansible; prepare ansible (`ansible-galaxy collection install community.general`)
-# - chezmoi: Run ansible
-# - ansible: Install packages
-
 - name: Set up Machine
   hosts: localhost
   connection: local
   vars_files:
     - vars/packages.yml
     - vars/repos.yml
+    - vars/fonts.yml
   tasks:
     - name: Setup - Install packages
       ansible.builtin.import_tasks: tasks/packages.yml
+    - name: Install fonts using fontmgr.py
+      ansible.builtin.command: >
+        uv run {{ ansible_env.HOME }}/.local/bin/fontmgr.py install {{ item.key }} --pattern {{ item.value }}
+      loop: "{{ fonts | dict2items }}"
     - name: Setup - Ensure default shell is /bin/zsh for "{{ ansible_env.USER }}"
       become: true
       ansible.builtin.user:
