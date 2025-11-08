@@ -26,9 +26,6 @@
   - org.gnome.shell.favorite-apps = @as []
   - org.gnome.tweaks.show-extensions-notice = false
   - org.gtk.gtk4.settings.file-chooser.show-hidden = true
-  
-- (Maybe) Install GNOME extensions
-  - Dash to panel
 
 - (Maybe) Keyboard shortcuts
   - Super+Enter -> terminal

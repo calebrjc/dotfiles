@@ -22,8 +22,7 @@ packages:
     - zoxide
     - zsh
   flatpak:
-    - com.mattjakeman.ExtensionManager
     - com.vivaldi.Vivaldi
     - org.kicad.KiCad
-    - io.missioncenter.MissionCenter
     - com.spotify.Client
+    # - io.missioncenter.MissionCenter
