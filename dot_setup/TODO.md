@@ -30,3 +30,5 @@
 - (Maybe) Keyboard shortcuts
   - Super+Enter -> terminal
   - Super+E -> Files
+
+- Write a script for creating bitwarden items
