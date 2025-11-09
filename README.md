@@ -9,5 +9,5 @@ source <(curl -fsSL https://raw.githubusercontent.com/calebrjc/dotfiles/trunk/do
 export GITHUB_USERNAME=calebrjc
 export BW_SESSION=$(bw login --raw)
 
-BINDIR="$HOME/.local/bin" sh -c "$(curl -fsSL get.chezmoi.io)" -- init --apply git@github.com:$GITHUB_USERNAME/dotfiles.git
+BINDIR="$HOME/.local/bin" sh -c "$(curl -fsSL get.chezmoi.io)" -- init --apply $GITHUB_USERNAME
 ```
