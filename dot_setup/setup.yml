@@ -12,7 +12,7 @@
   tasks:
     - name: Setup - Install packages
       ansible.builtin.import_tasks: tasks/packages.yml
-    - name: Setup - Install fonts using fontmgr.py
+    - name: Setup - Install fonts using fontmgr.py # TODO: Make idempotent
       ansible.builtin.command: >
         uv run {{ ansible_env.HOME }}/.local/bin/fontmgr.py install {{ item.key }} --pattern {{ item.value }}
       loop: "{{ fonts | dict2items }}"
@@ -21,3 +21,7 @@
       ansible.builtin.user:
         name: "{{ ansible_env.USER }}"
         shell: /bin/zsh
+    - name: Setup - Add SSH key to the SSH agent # TODO: Make idempotent
+      ansible.builtin.shell: |
+        eval "$(ssh-agent)"
+        ssh-add ~/.ssh/id_ed25519
