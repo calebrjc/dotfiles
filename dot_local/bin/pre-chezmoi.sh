@@ -5,7 +5,6 @@ set -euo pipefail
 BIN_DIR=~/.local/bin
 
 mkdir -p $BIN_DIR
-export PATH=$PATH:$BIN_DIR
 
 # Install Bitwarden
 (
