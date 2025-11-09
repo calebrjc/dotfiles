@@ -12,7 +12,7 @@
   tasks:
     - name: Setup - Install packages
       ansible.builtin.import_tasks: tasks/packages.yml
-    - name: Install fonts using fontmgr.py
+    - name: Setup - Install fonts using fontmgr.py
       ansible.builtin.command: >
         uv run {{ ansible_env.HOME }}/.local/bin/fontmgr.py install {{ item.key }} --pattern {{ item.value }}
       loop: "{{ fonts | dict2items }}"

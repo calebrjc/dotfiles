@@ -20,7 +20,7 @@ export PATH=$PATH:$BIN_DIR
     echo "Installed Bitwarden CLI to $BIN_DIR"
 )
 
-sudo dnf update > /dev/null
+sudo dnf update -y > /dev/null
 
 # Install Ansible
 (
