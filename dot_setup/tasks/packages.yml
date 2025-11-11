@@ -34,3 +34,7 @@
 
 - name: Packages - Install VSCodium
   ansible.builtin.import_tasks: installers/vscodium.yml
+
+- name: Packages - Install OpenCode
+  ansible.builtin.commend: >
+    curl -fsSL https://opencode.ai/install | bash
