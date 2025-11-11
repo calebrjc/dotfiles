@@ -36,5 +36,6 @@
   ansible.builtin.import_tasks: installers/vscodium.yml
 
 - name: Packages - Install OpenCode
-  ansible.builtin.commend: >
-    curl -fsSL https://opencode.ai/install | bash
+  ansible.builtin.shell:
+    cmd: "curl -fsSL https://opencode.ai/install | bash"
+    creates: "{{ ansible_env.HOME }}/.opencode/bin/opencode"
