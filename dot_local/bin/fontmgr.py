@@ -7,6 +7,7 @@
 import argparse
 import pathlib
 import shutil
+import filecmp
 import subprocess
 import tarfile
 import tempfile
@@ -62,9 +63,10 @@ def normalize_glob_patterns(patterns: str | list[str]) -> list[str]:
     return result
 
 
-def copy_files(src_dir_path: pathlib.Path, dest_dir_path: pathlib.Path, patterns: str) -> None:
+def copy_files(src_dir_path: pathlib.Path, dest_dir_path: pathlib.Path, patterns: str) -> tuple[int, int, int]:
     if not src_dir_path.is_dir():
         raise ValueError(f"{src_dir_path} is not a directory.")
+
     dest_dir_path.mkdir(parents=True, exist_ok=True)
 
     matched_files = set()
@@ -75,16 +77,40 @@ def copy_files(src_dir_path: pathlib.Path, dest_dir_path: pathlib.Path, patterns
 
     if not matched_files:
         print(f"No files found matching {patterns}")
-        return
+        return (0, 0, 0)
+
+    added = 0
+    updated = 0
+    skipped = 0
 
     for file in matched_files:
-        if file.is_file():
-            target_path = dest_dir_path / file.name
+        if not file.is_file():
+            continue
+
+        target_path = dest_dir_path / file.name
+
+        if not target_path.exists():
             shutil.copy2(file, target_path)
+            added += 1
+            continue
+
+        if filecmp.cmp(file, target_path, shallow=False):
+            skipped += 1
+            continue
+
+        shutil.copy2(file, target_path)
+        updated += 1
+
+    return (added, updated, skipped)
 
 
-def refresh_font_cache() -> None:
-    subprocess.run(["fc-cache", "-f"], check=True)
+def refresh_font_cache(force: bool = False) -> None:
+    args = ["fc-cache"]
+
+    if force:
+        args.append("-f")
+
+    subprocess.run(args, check=True)
 
 
 def print_tree(path: pathlib.Path, prefix: str = "", print_dir_name: bool = True) -> None:
@@ -115,8 +141,15 @@ def cmd_install(args: argparse.Namespace) -> None:
         target_dir_path = tmp_dir_path / get_archive_base_name(archive_path)
         extract_font(archive_path, target_dir_path)
 
-        copy_files(target_dir_path, pathlib.Path(args.dir).expanduser().resolve(), args.pattern)
-        refresh_font_cache()
+        font_dir_path = pathlib.Path(args.dir).expanduser().resolve()
+        added, updated, skipped = copy_files(target_dir_path, font_dir_path, args.pattern)
+
+        changed = (added + updated) > 0
+
+        if changed:
+            refresh_font_cache(force=True)
+
+        print(f"CHANGED={int(changed)} added={added} updated={updated} skipped={skipped}")
 
 
 def cmd_tree(args: argparse.Namespace) -> None:

@@ -12,10 +12,11 @@
   tasks:
     - name: Setup - Install packages
       ansible.builtin.import_tasks: tasks/packages.yml
-    - name: Setup - Install fonts using fontmgr.py # TODO: Make idempotent
+    - name: Setup - Install fonts using fontmgr.py
       ansible.builtin.command: >
         uv run {{ ansible_env.HOME }}/.local/bin/fontmgr.py install {{ item.key }} --pattern {{ item.value }}
       loop: "{{ fonts | dict2items }}"
+      changed_when: "'CHANGED=1' in (stdout | default(''))"
     - name: Setup - Ensure default shell is /bin/zsh for "{{ ansible_env.USER }}"
       become: true
       ansible.builtin.user:
