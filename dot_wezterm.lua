@@ -10,5 +10,6 @@ config.color_scheme = "Catppuccin Mocha"
 config.enable_wayland = false
 config.use_fancy_tab_bar = false
 config.tab_bar_at_bottom = true
+config.audible_bell = "Disabled"
 
 return config
