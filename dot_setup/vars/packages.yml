@@ -5,6 +5,7 @@ packages:
     - btop
     - cmake
     - curl
+    - git
     - git-delta
     - fd-find
     - fzf
