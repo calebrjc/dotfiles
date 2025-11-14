@@ -1,0 +1,10 @@
+if command -v bat >/dev/null 2>&1; then
+    alias bat="bat --color=always"
+    alias cat="bat --color=always"
+fi
+
+if command -v eza >/dev/null 2>&1; then
+   alias ls="eza -b --icons=auto --group-directories-first"
+   alias la="eza -ab --icons=auto --group-directories-first"
+   alias ll="eza -abhl --icons=auto --group-directories-first"
+fi

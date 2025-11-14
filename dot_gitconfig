@@ -1,3 +1,16 @@
 [user]
-	name = Caleb Johnson-Cantrell
-	email = 46861012+calebrjc@users.noreply.github.com
+    name = Caleb Johnson-Cantrell
+    email = 46861012+calebrjc@users.noreply.github.com
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true
+
+[merge]
+    conflictStyle = zdiff3

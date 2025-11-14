@@ -5,6 +5,8 @@ local config = wezterm.config_builder()
 config.font_size = 12
 config.font = wezterm.font("GoogleSansCode Nerd Font Mono")
 config.color_scheme = "Catppuccin Mocha"
+config.initial_rows = 30
+config.initial_cols = 120
 
 -- Window
 config.enable_wayland = false
