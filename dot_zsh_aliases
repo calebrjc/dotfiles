@@ -3,8 +3,17 @@ if command -v bat >/dev/null 2>&1; then
     alias cat="bat --color=always"
 fi
 
+if command -v chezmoi >/dev/null 2>&1; then
+    alias chea="chezmoi edit --apply"
+fi
+
 if command -v eza >/dev/null 2>&1; then
-   alias ls="eza -b --icons=auto --group-directories-first"
-   alias la="eza -ab --icons=auto --group-directories-first"
-   alias ll="eza -abhl --icons=auto --group-directories-first"
+    alias ls="eza -b --icons=auto --group-directories-first"
+    alias la="eza -ab --icons=auto --group-directories-first"
+    alias ll="eza -abhl --icons=auto --group-directories-first"
+    alias tree="eza -T --icons=auto"
+fi
+
+if command -v nvim >/dev/null 2>&1; then
+    alias n="nvim"
 fi

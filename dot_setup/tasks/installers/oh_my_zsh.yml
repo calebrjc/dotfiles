@@ -20,3 +20,15 @@
         dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
         depth: 1
         update: no
+
+    - name: Installers - Oh My Zsh - Install zsh-autosuggestions
+      ansible.builtin.git:
+        repo: https://github.com/zsh-users/zsh-autosuggestions
+        dest: "{{ ansible_env.HOME }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+        depth: 1
+        update: no
+
+    - name: Installers - Oh My Zsh - Install oh-my-posh
+      ansible.builtin.shell:
+        cmd: "curl -s https://ohmyposh.dev/install.sh | bash -s -- -d ~/.local/bin"
+        creates: "{{ ansible_env.HOME }}/.local/bin/oh-my-posh"
